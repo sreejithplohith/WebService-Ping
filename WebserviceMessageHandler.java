@@ -23,7 +23,6 @@ public class WebserviceMessageHandler {
 		try {
 			// get the file to POST 
 			
-			Date startTime = new Date();
 			ExecutorService executor = Executors
 					.newFixedThreadPool(3);
 			if(httpRequestType.equalsIgnoreCase("POST"))
@@ -42,7 +41,7 @@ public class WebserviceMessageHandler {
 	
 					if (listOfFiles[i].isFile()) {
 						File postedFile = listOfFiles[i];
-						Runnable worker = new MSPostMessageExecutor(url,postedFile, cert, password);
+						Runnable worker = new WebserviceMessageExecutor(url,postedFile, cert, password);
 						System.out.println("Invoking thread for the file "
 								+ postedFile.getName());
 						executor.execute(worker);
@@ -52,7 +51,7 @@ public class WebserviceMessageHandler {
 			else
 			{
 				
-				Runnable worker = new MSPostMessageExecutor(url, null,cert, password);
+				Runnable worker = new WebserviceMessageExecutor(url, null,cert, password);
 				executor.execute(worker);
 				
 			}

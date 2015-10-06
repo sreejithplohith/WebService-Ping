@@ -27,11 +27,11 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
 import javax.net.ssl.X509KeyManager;
 
-public class MSHttpsAPI {
+public class HttpsAPI {
 	protected SSLContext mSSLCtx;
 	static Logger cat;
 	
-	public MSHttpsAPI(File keyStore, String password) throws Exception {
+	public HttpsAPI(File keyStore, String password) throws Exception {
 		KeyManager[] keyMgrs = { new HttpKeyManager(keyStore, password) };
 		mSSLCtx = SSLContext.getInstance("TLS");
 		mSSLCtx.init(keyMgrs, getTrustManagers(), new SecureRandom());
@@ -328,7 +328,7 @@ public class MSHttpsAPI {
 			return mKeyManagers;
 		}
 
-	} // end of HttpKeyManager.java
+	} 
 
 	private static String loadFile(File file) throws Exception {
 		RandomAccessFile raf = new RandomAccessFile(file, "r");
@@ -358,7 +358,7 @@ public class MSHttpsAPI {
 			String op = conType;
 			if (op.equals("get")) {
 				URL url = new URL(urlString);
-				MSHttpsAPI api = new MSHttpsAPI(new File(certificate),
+				HttpsAPI api = new HttpsAPI(new File(certificate),
 						certPassword);
 				return con = api.get(url);
 
@@ -366,7 +366,7 @@ public class MSHttpsAPI {
 				URL url = new URL(urlString);
 				File file = new File(fileTopost);
 
-				MSHttpsAPI api = new MSHttpsAPI(new File(certificate),
+				HttpsAPI api = new HttpsAPI(new File(certificate),
 						certPassword);
 				return con = api.post(url, file);
 			}

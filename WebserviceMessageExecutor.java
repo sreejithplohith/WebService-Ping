@@ -44,12 +44,12 @@ public class WebserviceMessageExecutor implements Runnable {
 				    //Decide its a GET r POST request
 					if(null !=postedFile)
 					{
-						getCon = MSHttpsAPI.getConnection("post",
+						getCon = HttpsAPI.getConnection("post",
 							posturl, postedFile.getName(), certificate,
 							password);
 					}
 					else
-						getCon = MSHttpsAPI.getConnection("get",
+						getCon = HttpsAPI.getConnection("get",
 								posturl, null, certificate,
 								password);
 					if (getCon != null)
